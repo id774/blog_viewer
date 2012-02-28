@@ -1,0 +1,16 @@
+ja:
+  views:
+    pagination:
+      previous: "<< 前ページ"
+      next: "次ページ >>"
+      first: "最初"
+      last: "最後"
+      truncate: ""
+
+  activerecord:
+    models:
+      user: "ユーザー"  #g
+
+    attributes:
+      user:
+        email: "メール"  #g

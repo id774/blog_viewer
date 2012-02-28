@@ -1,0 +1,31 @@
+%h3
+  Entry of Blog
+  %p
+    %table{:class => "condensed-table bordered-table zebra-striped"}
+      %thead
+        %tr
+          %th{:style => "width: 150px;"} Item
+          %th Value
+      %tbody
+        %tr
+          %td Id
+          %td= @blog.id
+        %tr
+          %td Title
+          %td= @blog.title unless @blog.title.nil?
+        %tr
+          %td Created at
+          %td= @blog.created_at
+        %tr
+          %td Link
+          %td
+            = link_to @blog.link, @blog.link unless @blog.link.nil?
+        %tr
+          %td Description
+          %td= @blog.description unless @blog.description.nil?
+        %tr
+          %td Content
+          %td= @blog.content unless @blog.content.nil?
+        %tr
+          %td Created at
+          %td= @blog.created_at

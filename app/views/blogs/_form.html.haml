@@ -1,0 +1,13 @@
+= form_for @blog, :url => {:controller => 'blogs', :action => 'update'} do |f|
+  -if @blog.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@blog.errors.count, "error")} prohibited this service from being saved:"
+      %ul
+        - @blog.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    Screen name
+    = f.text_field :title
+  .actions
+    = f.submit 'Save'
