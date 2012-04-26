@@ -2,6 +2,61 @@
 # Add your own tasks in files placed in lib/tasks ending in .rake,
 # for example lib/tasks/capistrano.rake, and they will automatically be available to Rake.
 
-require File.expand_path('../config/application', __FILE__)
+# encoding: utf-8
 
+require File.expand_path('../config/application', __FILE__)
 RailsApp::Application.load_tasks
+
+require 'rubygems'
+require 'rspec/core'
+require 'rspec/core/rake_task'
+RSpec::Core::RakeTask.new(:spec) do |spec|
+  spec.rspec_opts = ["-c"]
+  spec.pattern = FileList['spec/**/*_spec.rb']
+end
+
+namespace :spec do 
+  desc "Run RSpec for controllers"
+  RSpec::Core::RakeTask.new(:controllers) do |spec|
+    spec.rspec_opts = ["-c"]
+    spec.pattern = FileList['spec/controllers/**/*_spec.rb']
+  end
+
+  desc "Run RSpec for models"
+  RSpec::Core::RakeTask.new(:models) do |spec|
+    spec.rspec_opts = ["-c"]
+    spec.pattern = FileList['spec/models/**/*_spec.rb']
+  end
+end
+
+require 'jeweler'
+Jeweler::Tasks.new do |gem|
+  # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
+  gem.name = "blog_viewer"
+  gem.homepage = ""
+  gem.license = ""
+  gem.summary = %Q{blog_viewer}
+  gem.description = %Q{Blog Viewer}
+  gem.email = "idnanashi@gmail.com"
+  gem.authors = ["id774"]
+  # dependencies defined in Gemfile
+end
+Jeweler::RubygemsDotOrgTasks.new
+
+if /^1\.9\./ =~ RUBY_VERSION
+  desc "Run RSpec code examples with simplecov"
+  task :simplecov do
+    ENV['COVERAGE'] = "on"
+    Rake::Task[:spec].invoke
+  end
+else
+  desc "Run RSpec code examples with rcov"
+  RSpec::Core::RakeTask.new(:rcov) do |spec|
+    spec.pattern = FileList['spec/**/*_spec.rb']
+    exclude_files = [
+      "gems",
+    ]
+    spec.rcov_opts = ['--exclude', exclude_files.join(",")]
+    spec.rcov = true
+  end
+end
