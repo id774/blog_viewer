@@ -29,4 +29,10 @@
                   %td
                     = link_to blog.link, blog.link unless blog.link.nil?
 
-          = paginate @blogs, :window => 5000, :outer_window => 0
+          .actions
+            = form_for @search, :url => blogs_path, :html => {:method => :get} do |f|
+              = f.label "Search"
+              = f.text_field :description_contains
+              = f.submit "Submit", :class => 'btn primary'
+
+          = will_paginate @blogs, :renderer => BootstrapPaginationRenderer

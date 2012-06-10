@@ -6,7 +6,8 @@ class BlogsController < ApplicationController
   # GET /blogs
   # GET /blogs.json
   def index
-    @blogs = Blog.scoped(:order => "id DESC").page(params[:page]).per(1000)
+    @search = Blog.search(params[:search], :order => "id DESC")
+    @blogs = @search.paginate(:page => params[:page], :order => "id DESC")
 
     unless params[:uid].nil?
       @blogs = @blogs.where(:uid => params[:uid])
@@ -40,5 +41,27 @@ class BlogsController < ApplicationController
         format.json { render json: @blog.errors, blog: :unprocessable_entity }
       end
     end
+  end
+end
+
+class BootstrapPaginationRenderer < WillPaginate::ActionView::LinkRenderer
+  private
+  def previous_or_next_page(page, text, classname)
+    link(text, page, :class => classname)
+  end
+
+  public
+  # method as you see fit.
+  def to_html
+    html = pagination.map do |item|
+      tag(:li,
+        ((item.is_a?(Fixnum))?
+          page_number(item) :
+          send(item)))
+    end.join(@options[:link_separator])
+
+    html = tag(:ul, html)
+
+    @options[:container] ? html_container(html) : html
   end
 end
