@@ -47,11 +47,10 @@ end
 class BootstrapPaginationRenderer < WillPaginate::ActionView::LinkRenderer
   private
   def previous_or_next_page(page, text, classname)
-    link(text, page, :class => classname)
+    link(text, page, :class => classname) unless page == false
   end
 
   public
-  # method as you see fit.
   def to_html
     html = pagination.map do |item|
       tag(:li,
