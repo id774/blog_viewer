@@ -25,7 +25,8 @@
                   %td
                     = blog.title unless blog.title.nil?
                   %td
-                    = cutoff_by_char(blog.description, 300) unless blog.description.nil?
+                    - unless blog.description.nil? || blog.title == blog.description
+                      = cutoff_by_char(blog.description, 300)
                   %td
                     = link_to blog.link, blog.link unless blog.link.nil?
 
