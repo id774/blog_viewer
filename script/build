@@ -13,6 +13,7 @@ kickstart() {
 
 exec_rspec() {
     $RACK_ROOT/script/bootstrap
+    bundle exec $RACK_ROOT/bin/rake db:migrate
     bundle exec $RACK_ROOT/bin/rake simplecov
 }
 

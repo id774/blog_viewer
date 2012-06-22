@@ -10,22 +10,11 @@ RailsApp::Application.load_tasks
 require 'rubygems'
 require 'rspec/core'
 require 'rspec/core/rake_task'
-RSpec::Core::RakeTask.new(:spec) do |spec|
-  spec.rspec_opts = ["-c"]
-  spec.pattern = FileList['spec/**/*_spec.rb']
-end
 
-namespace :spec do 
-  desc "Run RSpec for controllers"
-  RSpec::Core::RakeTask.new(:controllers) do |spec|
-    spec.rspec_opts = ["-c"]
-    spec.pattern = FileList['spec/controllers/**/*_spec.rb']
-  end
-
-  desc "Run RSpec for models"
-  RSpec::Core::RakeTask.new(:models) do |spec|
-    spec.rspec_opts = ["-c"]
-    spec.pattern = FileList['spec/models/**/*_spec.rb']
+task :spec do
+  RSpec::Core::RakeTask.new(:spec) do |spec|
+    spec.rspec_opts = ["-c","-fs"]
+    spec.pattern = FileList['spec/**/*_spec.rb']
   end
 end
 
