@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 class BlogsController < ApplicationController
+  before_filter :authenticate if Auth.basic_auth
   #before_filter :authenticate_user!
 
   # GET /blogs
@@ -40,6 +41,14 @@ class BlogsController < ApplicationController
         format.html { render action: "edit" }
         format.json { render json: @blog.errors, blog: :unprocessable_entity }
       end
+    end
+  end
+
+  private
+  def authenticate
+    authenticate_or_request_with_http_basic do |username, password|
+      username == Auth.username &&
+      password == Auth.password
     end
   end
 end
