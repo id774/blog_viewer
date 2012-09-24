@@ -28,22 +28,6 @@ class BlogsController < ApplicationController
     @blog = Blog.find(params[:id])
   end
 
-  # PUT /blogs/1
-  # PUT /blogs/1.json
-  def update
-    @blog = Blogs.find(params[:id])
-
-    respond_to do |format|
-      if @blog.update_attributes(params[:status])
-        format.html { redirect_to edit_blog_path(@blog), notice: 'blog was successfully updated.' }
-        format.json { head :ok }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @blog.errors, blog: :unprocessable_entity }
-      end
-    end
-  end
-
   private
   def authenticate
     authenticate_or_request_with_http_basic do |username, password|
