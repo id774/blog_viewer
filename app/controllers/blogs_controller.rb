@@ -10,13 +10,6 @@ class BlogsController < ApplicationController
     @search = Blog.search(params[:search], :order => "id DESC")
     @blogs = @search.paginate(:page => params[:page], :order => "id DESC")
 
-    unless params[:uid].nil?
-      @blogs = @blogs.where(:uid => params[:uid])
-    end
-    unless params[:screen_name].nil?
-      @blogs = @blogs.where(:screen_name => params[:screen_name])
-    end
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @blogs }
