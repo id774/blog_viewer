@@ -18,5 +18,21 @@ describe BlogsController, 'ブログ' do
         response.should be_success
       end
     end
+
+    describe '検索' do
+      context '検索対象の字句を送信する' do
+        it "検索結果が表示される" do
+          post 'index', :param => {
+            :search => "hoge",
+          }
+
+          response.should be_success
+          response.should_not be_redirect
+          response.header.should have_at_least(1).items
+          flash[:notice].should be_nil
+        end
+      end
+    end
+
   end
 end
