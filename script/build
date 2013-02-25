@@ -14,8 +14,8 @@ kickstart() {
 exec_rspec() {
     cd $RACK_ROOT
     bundle install --path vendor/gems
-    bundle exec $RACK_ROOT/bin/rake db:migrate
-    bundle exec $RACK_ROOT/bin/rake simplecov
+    bundle exec rake db:migrate
+    bundle exec rake simplecov
 }
 
 main() {
