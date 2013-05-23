@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 class BlogsController < ApplicationController
-  before_filter :authenticate if Auth.basic_auth
+  before_filter :authenticate if RailsApp::Application.config.basic_auth
   #before_filter :authenticate_user!
 
   # GET /blogs
@@ -24,8 +24,8 @@ class BlogsController < ApplicationController
   private
   def authenticate
     authenticate_or_request_with_http_basic do |username, password|
-      username == Auth.username &&
-      password == Auth.password
+      username == RailsApp::Application.config.username &&
+      password == RailsApp::Application.config.password
     end
   end
 end
