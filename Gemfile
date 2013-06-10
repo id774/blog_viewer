@@ -38,6 +38,8 @@ gem 'haml-rails'
 gem "meta_search"
 gem "will_paginate", "~> 3.0.pre2"
 
+gem "rinku"
+
 group :test do
   gem 'rspec'
   gem 'rcov', :platforms => :mri_18

@@ -23,10 +23,10 @@
                   %td
                     = link_to blog.created_at, edit_blog_path(blog)
                   %td
-                    = blog.title unless blog.title.nil?
+                    = auto_link(blog.title) unless blog.title.nil?
                   %td
                     - unless blog.description.nil? || blog.title == blog.description
-                      = cutoff_by_char(blog.description, 500)
+                      = auto_link(cutoff_by_char(blog.description, 500))
                   %td
                     = link_to blog.link, blog.link unless blog.link.nil?
 

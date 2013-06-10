@@ -11,7 +11,7 @@
           %td= @blog.id
         %tr
           %td Title
-          %td= @blog.title unless @blog.title.nil?
+          %td= auto_link(@blog.title) unless @blog.title.nil?
         %tr
           %td Created at
           %td= @blog.created_at
@@ -21,7 +21,7 @@
             = link_to @blog.link, @blog.link unless @blog.link.nil?
         %tr
           %td Description
-          %td= @blog.description unless @blog.description.nil?
+          %td= auto_link(@blog.description) unless @blog.description.nil?
         %tr
           %td Content
-          %td= @blog.content unless @blog.content.nil?
+          %td= auto_link(@blog.content) unless @blog.content.nil?
