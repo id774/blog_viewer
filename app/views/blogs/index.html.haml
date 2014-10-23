@@ -19,9 +19,9 @@
                 - seq += 1
                 %tr
                   %td
-                    = seq
+                    = link_to seq, edit_blog_path(blog)
                   %td
-                    = link_to blog.created_at, edit_blog_path(blog)
+                    = link_to blog.created_at, blog.link
                   %td
                     = auto_link(blog.title) unless blog.title.nil?
                   %td
