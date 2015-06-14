@@ -21,14 +21,14 @@
                   %td
                     = link_to seq, edit_blog_path(blog)
                   %td
-                    = link_to blog.created_at, blog.link
+                    = link_to blog.created_at, blog.link, :target => ["_blank"]
                   %td
                     = auto_link(blog.title) unless blog.title.nil?
                   %td
                     - unless blog.description.nil? || blog.title == blog.description
                       = auto_link(cutoff_by_char(blog.description, 500))
                   %td
-                    = link_to blog.link, blog.link unless blog.link.nil?
+                    = link_to blog.link, blog.link, :target => ["_blank"] unless blog.link.nil?
 
           .actions
             = form_for @search, :url => blogs_path, :html => {:method => :get} do |f|
