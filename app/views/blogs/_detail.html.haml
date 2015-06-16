@@ -18,7 +18,7 @@
         %tr
           %td Link
           %td
-            = link_to @blog.link, @blog.link unless @blog.link.nil?
+            = link_to @blog.link, @blog.link, :target => ["_blank"] unless @blog.link.nil?
         %tr
           %td Description
           %td= auto_link(@blog.description) unless @blog.description.nil?
