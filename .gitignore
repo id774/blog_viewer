@@ -2,6 +2,7 @@ Gemfile.lock
 vendor/bundler
 vendor/bundler64
 .bundle
+config/.config.yml
 db/*.sqlite3
 db/*.db
 db/schema.rb

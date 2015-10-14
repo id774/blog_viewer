@@ -45,10 +45,18 @@ module RailsApp
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    # Configuration for blog viewer.
-    config.per_page   = 1000
-    config.username   = "your_username"
-    config.password   = "your_password"
     config.basic_auth = false
+    config.per_page   = 1000
+
+    configfile = Rails.root.join('config', '.config.yml')
+    if File.exist?(configfile)
+      c = YAML.load_file(configfile)
+
+      config.basic_auth = true
+      config.username = c['auth']['username']
+      config.password = c['auth']['password']
+
+      config.per_page = c['config']['per_page']
+    end
   end
 end
